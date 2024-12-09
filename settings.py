@@ -13,3 +13,7 @@ class Settings():
         self.bullet_allowed = 3
         #stars
         self.stars_allowed = 1000
+
+        self.alien_speed = 1.0
+        self.fleet_drop_speed = 10
+        self.fleet_direcrion = 1

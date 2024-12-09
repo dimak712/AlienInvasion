@@ -30,6 +30,7 @@ class AlienInvasion:
             self.ship.update()
             self.bullets.update()
             self._update_bullets()
+            self._update_aliens()
             self._update_screen()    
             
 
@@ -106,6 +107,22 @@ class AlienInvasion:
         for _ in range(self.settings.stars_allowed):
             star = Star(self)
             self.stars.add(star)
+
+    def _check_fleet_edges(self):
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
+    
+    def _change_fleet_direction(self):
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direcrion *= -1
+
+    def _update_aliens(self):
+        self._check_fleet_edges()
+        self._check_events()
+        self.aliens.update()
 
 if __name__ == '__main__':
     ai = AlienInvasion()
